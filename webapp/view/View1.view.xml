@@ -1,0 +1,113 @@
+<mvc:View
+    controllerName="com.sap.managecalloffapp.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:upload="sap.m.upload"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <!-- <uxap:ObjectPageLayout
+                id="ObjectPageLayout1"
+                upperCaseAnchorBar="false"
+                showAnchorBar="true"
+                enableLazyLoading="true"
+            >
+                <uxap:sections>
+                    <uxap:ObjectPageSection id="_IDGenObjectPageSection1">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="_IDGenObjectPageSubSection1"
+                                title=""
+                                titleUppercase="false"
+                            >
+                                <uxap:blocks> -->
+                                    <Table
+                                        id="idProductsTable"
+                                        inset="false"
+                                        mode="SingleSelectLeft"
+                                        items="{myModel>/}"
+                                    >
+                                        <headerToolbar>
+                                            <OverflowToolbar>
+                                                <Button
+                                                    text="Create Call Off" press="onNav"
+                                                />
+                                                 <Button
+                                                    text="Add"
+                                                />
+                                                 <Button
+                                                    text="Delete Row"
+                                                />
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+
+                                        <columns>
+                                            <Column width="12em">
+                                                <Text text="Call of Numbers" />
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="true"
+                                            >
+                                                <Text text="Description" />
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                demandPopin="true"
+                                            >
+                                                <Text text="Start Date" />
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Desktop"
+                                                demandPopin="true"
+                                                hAlign="Center"
+                                            >
+                                                <Text text="End Date" />
+                                            </Column>
+                                            <Column>
+                                                <Text text="Status" />
+                                            </Column>
+                                            
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem vAlign="Middle">
+                                                <cells>
+                            <Text text="{myModel>CoN}" />
+                            <Text text="{myModel>Desc}" />
+                            <Text text="{myModel>sd}" />
+                            <Text text="{myModel>ed}" />
+                            <Text text="{myModel>status}" />
+
+                            
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                <!-- </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+
+                            
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
+            </uxap:ObjectPageLayout> -->
+        </content>
+        <!-- <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="Save As Draft" />
+                <Button text="Create" />
+                <Button text="Cancel" />
+            </Toolbar>
+        </footer> -->
+    </Page>
+</mvc:View>
