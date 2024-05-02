@@ -1,12 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/core/Fragment"
 
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,JSONModel) {
+    function (Controller, JSONModel, Fragment) {
         "use strict";
 
         return Controller.extend("com.sap.managecalloffapp.controller.View2", {
@@ -85,8 +86,186 @@ sap.ui.define([
                         "HireDate": "Date(1354348800000)"
                     }
                 ]
-                let atablemodel = new JSONModel (data);
+
+
+                let atablemodel = new JSONModel(data);
                 this.getView().setModel(atablemodel, "myModel")
-            }
+
+
+
+                var oData = [{
+                    ItemCategory: "",
+                    Material: "",
+                    ShortText: "",
+                    MaterialGroup: "",
+                    Quantity: "",
+                    UOM: "",
+                    Price: "",
+                    DeliveryDate: "",
+                    AccountAssignmentCategory: ""
+                }]
+                    ;
+
+                let btablemodel = new JSONModel(oData);
+                this.getView().setModel(btablemodel, "myModell")
+
+                let suppllier = [{ supNo: "SUP1232345" },
+                { supNo: "SUP123235" },
+                { supNo: "SUP1223345" }]
+                let supplier = new JSONModel(suppllier);
+                this.getView().setModel(supplier, "sup")
+
+
+                let contractData = [{ conNo: "CON20001" },
+                { conNo: "CON20002" },
+                { conNo: "CON20301" }]
+                let contract = new JSONModel(contractData);
+                this.getView().setModel(contract, "con")
+
+
+                let POdata = [{ poNo: "PO300000" },
+                { poNo: "PO300001" },
+                { poNo: "PO300002" }]
+                let PO = new JSONModel(POdata);
+                this.getView().setModel(PO, "PO")
+
+
+
+                
+            },
+
+            onAddItemPress: function () {
+               
+
+                var oModel = this.getView().getModel("myModell");
+                let oldData = oModel.getData();
+
+
+                var oNewRowData = {
+                    ItemCategory: "",
+                    Material: "",
+                    ShortText: "",
+                    MaterialGroup: "",
+                    Quantity: "",
+                    UOM: "",
+                    Price: "",
+                    DeliveryDate: "",
+                    AccountAssignmentCategory: ""
+                };
+
+                oldData.push(oNewRowData);
+                oModel.setData(oldData);
+                oModel.refresh();
+            },
+            onAddMoreDetails: function () {
+                if (!this.AddMoreDetails) {
+                    Fragment.load({
+                        id: this.getView().getId(),
+                        name: "com.sap.managecalloffapp..view.fragment.AddMoreDetails",
+                        controller: this
+                    }).then(oDialog => {
+                        this.AddMoreDetails = oDialog
+                        this.getView().addDependent(oDialog)
+                        oDialog.open()
+                    })
+                } else {
+                    this.AddMoreDetails.open()
+                }
+            },
+            onCancel: function () {
+                this.AddMoreDetails.close();
+            },
+            supplierHelp: function () {
+                if (!this.Supplier) {
+                    Fragment.load({
+                        id: this.getView().getId(),
+                        name: "com.sap.managecalloffapp..view.fragment.Supplier",
+                        controller: this
+                    }).then(oDialog => {
+                        this.Supplier = oDialog
+                        this.getView().addDependent(oDialog)
+                        oDialog.open()
+                    })
+                } else {
+                    this.Supplier.open()
+                }
+            },
+            onCancelSupplier :function(){
+                this.Supplier.close();
+
+            },
+            onDelete: function () {
+                var oTable = this.byId("idProductsTable");
+                var aSelectedItems = oTable.getSelectedContexts();
+ 
+                // Check if any item is selected
+                if (aSelectedItems.length > 0) {
+                    // If only one item is selected, delete it directly
+                    if (aSelectedItems.length === 1) {
+                        var oSelectedItem = aSelectedItems[0];
+                        var oModel = oTable.getModel("myModell");
+                        var aData = oModel.getData();
+                        var iIndex = aData.indexOf(oSelectedItem.getObject());
+                        aData.splice(iIndex, 1); // Remove the selected item
+                        oModel.setData(aData); // Update the model
+                    } else {
+                        // If multiple items are selected, delete them one by one starting from the last index
+                        for (var i = aSelectedItems.length - 1; i >= 0; i--) {
+                            var oSelectedItem = aSelectedItems[i];
+                            var oModel = oTable.getModel("myModell");
+                            var aData = oModel.getData();
+                            var iIndex = aData.indexOf(oSelectedItem.getObject());
+                            aData.splice(iIndex, 1); // Remove the selected item
+                            oModel.setData(aData); // Update the model
+                        }
+                    }
+ 
+                    // Clear the selection after deletion
+                    oTable.removeSelections();
+ 
+                }
+            },
+            contractHelp : function(){
+                if (!this.contract) {
+                    Fragment.load({
+                        id: this.getView().getId(),
+                        name: "com.sap.managecalloffapp..view.fragment.Contract",
+                        controller: this
+                    }).then(oDialog => {
+                        this.contract = oDialog
+                        this.getView().addDependent(oDialog)
+                        oDialog.open()
+                    })
+                } else {
+                    this.contract.open()
+                }
+            },
+            onCancelContract :function(){
+                this.contract.close();
+
+            },
+            onAddFromDocument : function(){
+                if (!this.PO) {
+                    Fragment.load({
+                        id: this.getView().getId(),
+                        name: "com.sap.managecalloffapp..view.fragment.ListOfPO",
+                        controller: this
+                    }).then(oDialog => {
+                        this.PO = oDialog
+                        this.getView().addDependent(oDialog)
+                        oDialog.open()
+                    })
+                } else {
+                    this.PO.open()
+                }
+            },
+            onCancelPO :function(){
+                this.PO.close();
+
+            },
+            
+
+
+
         });
     });

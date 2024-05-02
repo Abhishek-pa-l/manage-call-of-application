@@ -1,0 +1,78 @@
+<core:FragmentDefinition
+    xmlns:upload="sap.m.upload"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+   
+>
+    <Dialog
+        title="Purchse Order Item Account Assignment "
+        contentWidth="100%"
+    >
+        <content>
+        <Table items=""
+            id="t1"
+            mode=""
+            class="">
+                <columns>
+                    <Column id="c1">
+                        <Text text="Account Assignment No." id="txt1" />
+                    </Column>
+                    <Column id="c2">
+                        <Text text="G/L Account" id="txt2" />
+                    </Column>
+                    <Column id="c3">
+                        <Text text="Distribution %" id="txt3" />
+                    </Column>
+                    <Column id="c4">
+                        <Text text="Acct Assgnt cat Desc" id="txt4" />
+                    </Column>
+                    <Column id="c5">
+                        <Text text="Acct Assgnt cat " id="txt5" />
+                    </Column>
+                    <Column id="c6">
+                        <Text text="Cost Center" id="txt6" />
+                    </Column>
+                    <Column id="c7">
+                        <Text text="Order" id="txt7" />
+                    </Column>
+                    <Column id="c8">
+                        <Text text="WBS" id="txt8" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+                        <cells>
+                            <Input value="" />
+                            <Input value="" />
+                            <Input value="" />
+                            <Input value="" />
+                            <Input value="" />
+                            <Input value="" />
+                            <Input value="" />
+                            <Input value="" />
+
+
+                            
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button
+                    text="Add"
+                    press="onCancel"
+                />
+                <Button
+                    text="Cancel"
+                    press="onCancel"
+                />
+            </Toolbar>
+        </footer>
+           
+    </Dialog>
+</core:FragmentDefinition>

@@ -50,10 +50,19 @@
                                             text="Call Off Notice Type"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input
-                                            id="idContractorNameInput"
-                                            value=""
-                                        />
+                                        <Select
+                                                        forceSelection="false"
+                                                        width="100%"
+                                                    >
+                                                        <core:Item
+                                                            key=""
+                                                            text="CON"
+                                                        />
+                                                        <core:Item
+                                                            key=""
+                                                            text="CONK"
+                                                        />
+                                                    </Select>
 
                                         <Label
                                             id="_IDGe"
@@ -63,7 +72,7 @@
                                         <Input
                                             id="idContractorNumberInput"
                                             value=""
-                                            valueHelpRequest=""
+                                            valueHelpRequest="supplierHelp"
                                             showValueHelp="true"
                                         />
 
@@ -75,7 +84,7 @@
                                         <Input
                                             id="idContractNumberInput"
                                             value=""
-                                            valueHelpRequest=""
+                                            valueHelpRequest="contractHelp"
                                             showValueHelp="true"
                                         />
                                         <Label
@@ -83,12 +92,29 @@
                                             text="Start Date"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <DateRangeSelection />
+                                        <DatePicker ></DatePicker>
+                                        <Label
+                                            id="_IDGenLe2"
+                                            text="End Date"
+                                            class="sapUiTinyMarginTop"
+                                        />
+                                        <DatePicker ></DatePicker>
                                         <Label
                                             text="Currency"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input value="" />
+                                        <Select
+                                                        forceSelection="false"
+                                                    >
+                                                        <core:Item
+                                                            key=""
+                                                            text="USD"
+                                                        />
+                                                        <core:Item
+                                                            key=""
+                                                            text="INR"
+                                                        />
+                                                    </Select>
                                         <Label
                                             text="Retantion"
                                             class="sapUiTinyMarginTop"
@@ -110,21 +136,25 @@
 
                             <uxap:ObjectPageSubSection
                                 id="_IDGenObjectPageSubSection2"
-                                title="Items"
+                                title="Call Off Items"
                             >
                                 <uxap:blocks>
                                     <Table
                                         id="idProductsTable"
                                         inset="false"
-                                        mode="SingleSelectLeft"
+                                        mode="MultiSelect"
+                                        items="{myModell>/}"
                                     >
                                         <headerToolbar>
                                             <OverflowToolbar>
+                                            <ToolbarSpacer ></ToolbarSpacer>
                                                 <Button
-                                                    text="Add from Document"
+                                                    text="Add from Document" press="onAddFromDocument"
                                                 />
-                                                <Button text="Add Row"></Button>
-                                                <Button text="Delete Row"></Button>
+                                                <Button text="Add Row" press="onAddItemPress"></Button>
+                                                <Button text="Delete Row" press="onDelete"></Button>
+                                                <Button text="Add more Details" press="onAddMoreDetails"></Button>
+
 
                                             </OverflowToolbar>
                                         </headerToolbar>
@@ -185,21 +215,45 @@
                                                             text="Service"
                                                         />
                                                     </Select>
-                                                    <Input
-                                                        valueHelpRequest=""
-                                                        showValueHelp="true"
-                                                    />
-                                                    <Input  />
-                                                    <Input
-                                                        valueHelpRequest=""
-                                                        showValueHelp="true"
-                                                    />
-                                                    <Input />
-                                                    <Input
-                                                        valueHelpRequest=""
-                                                        showValueHelp="true"
-                                                    />
-                                                    <Input  />
+                                                    <Select
+                                                        forceSelection="false"
+                                                    >
+                                                        <core:Item
+                                                            key=""
+                                                            text="Material 1"
+                                                        />
+                                                        <core:Item
+                                                            key=""
+                                                            text="Material 2"
+                                                        />
+                                                    </Select>
+                                                    <Input value="{myModell>ShortText}" />
+                                                   <Select
+                                                        forceSelection="false"
+                                                    >
+                                                        <core:Item
+                                                            key=""
+                                                            text="Material Type 1"
+                                                        />
+                                                        <core:Item
+                                                            key=""
+                                                            text="Material Type 2"
+                                                        />
+                                                    </Select>
+                                                    <Input value="{myModell>Qunatity}"/>
+                                                   <Select
+                                                        forceSelection="false"
+                                                    >
+                                                        <core:Item
+                                                            key=""
+                                                            text="AU"
+                                                        />
+                                                        <core:Item
+                                                            key=""
+                                                            text="EA"
+                                                        />
+                                                    </Select>
+                                                    <Input value="{myModell>price}" />
                                                     <DatePicker ></DatePicker>
                                                       <Select
                                                         forceSelection="false"
