@@ -41,6 +41,30 @@
 
                                     
 								</fb:FilterGroupItem>
+
+                                  <fb:FilterGroupItem name="Supplier" label="Supplier" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<Input />
+									</fb:control>
+
+                                    
+								</fb:FilterGroupItem>
+
+                                  <fb:FilterGroupItem name="Contract" label="Contract" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<Input />
+									</fb:control>
+
+                                    
+								</fb:FilterGroupItem>
+
+                                  <fb:FilterGroupItem name="Call Off Type" label="Call Off Type" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<Input />
+									</fb:control>
+
+                                    
+								</fb:FilterGroupItem>
 							
 							
 							</fb:filterGroupItems>

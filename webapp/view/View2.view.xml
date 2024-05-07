@@ -125,7 +125,7 @@
 
                             <uxap:ObjectPageSubSection
                                 id="_IDGenObjectPageSubSection2"
-                                title="Call Off Items"
+                                title="Items"
                             >
                                 <uxap:blocks>
                                     <Table
@@ -259,6 +259,27 @@
                                                             key=""
                                                             text="Order"
                                                         />
+                                                          <core:Item
+                                                            key="0"
+                                                            text="DUMMY Acct Assgn Cat (0)"
+                                                        />
+                                                          <core:Item
+                                                            key="1"
+                                                            text="Defnd Acct Assgn Cat (1)"
+                                                        />
+                                                         <core:Item
+                                                            key="2"
+                                                            text=" Project stock: Defnd (Q)"
+                                                        />
+                                                          <core:Item
+                                                            key="3"
+                                                            text="No AA for Mat.Grp. (W)"
+                                                        />
+                                                          <core:Item
+                                                            key="4"
+                                                            text="Accessories Cost(Z)"
+                                                        />
+                                                        
                                                     </Select>
                                                 </cells>
                                             </ColumnListItem>
