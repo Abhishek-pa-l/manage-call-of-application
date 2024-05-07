@@ -123,19 +123,50 @@ sap.ui.define([
                 this.getView().setModel(contract, "con")
 
 
-                let POdata = [{ poNo: "PO300000" },
-                { poNo: "PO300001" },
-                { poNo: "PO300002" }]
+                let POdata = [{ poNo: "300000" },
+                { poNo: "300001" },
+                { poNo: "300002" }]
                 let PO = new JSONModel(POdata);
                 this.getView().setModel(PO, "PO")
 
+                let logModel = new JSONModel([{
+                    "logDateTime": "2024-03-30",
+                    "logTitle": "Status Changed In Approval",
+                    "logComments": "Status Changed In Approval",
+                    "loggedBy": "LCD@kpo.kz",
+
+                }, {
+                    "logDateTime": "2024-04-01",
+                    "logTitle": "LCD Dept Commented",
+                    "logComments": "This is my example comment....",
+                    "loggedBy": "LCD@kpo.kz",
+
+                },
+                {
+                    "logDateTime": "2024-04-05",
+                    "logTitle": "C&P Dept Commented",
+                    "logComments": "This is my example comment....",
+                    "loggedBy": "C&P@kpo.kz",
+
+                },
+                {
+                    "logDateTime": "2024-04-09",
+                    "logTitle": "VQ Section Head Commented",
+                    "logComments": "This is my example comment....",
+                    "loggedBy": "VQ@kpo.kz",
+
+                }]);
+
+                this.getView().setModel(logModel, "logModel");
 
 
-                
+            },
+            onBeforeRendering: function () {
+                this._generateTokenforWf();
             },
 
             onAddItemPress: function () {
-               
+
 
                 var oModel = this.getView().getModel("myModell");
                 let oldData = oModel.getData();
@@ -190,14 +221,14 @@ sap.ui.define([
                     this.Supplier.open()
                 }
             },
-            onCancelSupplier :function(){
+            onCancelSupplier: function () {
                 this.Supplier.close();
 
             },
             onDelete: function () {
                 var oTable = this.byId("idProductsTable");
                 var aSelectedItems = oTable.getSelectedContexts();
- 
+
                 // Check if any item is selected
                 if (aSelectedItems.length > 0) {
                     // If only one item is selected, delete it directly
@@ -219,13 +250,13 @@ sap.ui.define([
                             oModel.setData(aData); // Update the model
                         }
                     }
- 
+
                     // Clear the selection after deletion
                     oTable.removeSelections();
- 
+
                 }
             },
-            contractHelp : function(){
+            contractHelp: function () {
                 if (!this.contract) {
                     Fragment.load({
                         id: this.getView().getId(),
@@ -240,11 +271,11 @@ sap.ui.define([
                     this.contract.open()
                 }
             },
-            onCancelContract :function(){
+            onCancelContract: function () {
                 this.contract.close();
 
             },
-            onAddFromDocument : function(){
+            onAddFromDocument: function () {
                 if (!this.PO) {
                     Fragment.load({
                         id: this.getView().getId(),
@@ -259,11 +290,79 @@ sap.ui.define([
                     this.PO.open()
                 }
             },
-            onCancelPO :function(){
+            onCancelPO: function () {
                 this.PO.close();
 
             },
-            
+            onSubmit: function () {
+                let that = this;
+                debugger;
+                const oPayload = {
+                    "definitionId": "eu10.development-and-test-kjejpj21.postaward.cONApproval",
+                    "context": {
+                        "contype": "CON",
+                        "supplier": "SUP134000",
+                        "contract": "CON78600",
+                        "startdate": "2024-05-30",
+                        "enddate": "2024-06-30"
+                    }
+                }
+                let sURL;
+                if (this.appModulePath.length > 5) {
+                    sURL = this.appModulePath + "/spa/workflow/rest/v1/workflow-instances";
+                }
+                else {
+                    sURL = "/workflow/rest/v1/workflow-instances";
+                }
+                $.ajax({
+                    url: sURL,
+                    method: "POST",
+
+                    data: JSON.stringify(oPayload),
+                    async: false,
+                    headers: {
+                        "X-CSRF-Token": that.tokenWF,
+                        "Content-Type": "application/json"
+                    },
+                    success: function (result1) {
+                        debugger;
+                        sap.m.MessageBox.success("Sent For Approval");
+                        
+
+                    }.bind(this),
+                    error: function (oError) {
+                        sap.m.MessageBox.error("Technical error occured.")
+                    }.bind(this)
+                });
+
+            },
+            _generateTokenforWf: function () {
+                // this.getModel("appModel").setProperty("/busy", true);
+                const appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
+                const appPath = appId.replaceAll(".", "/");
+                this.appModulePath = jQuery.sap.getModulePath(appPath);
+                let that = this;
+                let sURL;
+                if (this.appModulePath.length > 5) {
+                    sURL = this.appModulePath + "/spa/workflow/rest/v1/xsrf-token";
+                }
+                else {
+                    sURL = "/rest/v1/xsrf-token";
+                }
+                $.ajax({
+
+                    url: sURL,
+                    method: "GET",
+                    async: false,
+                    headers: {
+                        "X-CSRF-Token": "Fetch"
+                    },
+                    success: function (result1, xhr1, data1) {
+                        that.tokenWF = data1.getResponseHeader("x-csrf-token");
+                        console.log(that)
+                    }
+                });
+            },
 
 
 

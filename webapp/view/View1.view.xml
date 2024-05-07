@@ -9,27 +9,42 @@
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:upload="sap.m.upload"
+    	xmlns:fb="sap.ui.comp.filterbar"
 >
     <Page
         id="page"
         title="{i18n>title}"
     >
         <content>
-            <!-- <uxap:ObjectPageLayout
-                id="ObjectPageLayout1"
-                upperCaseAnchorBar="false"
-                showAnchorBar="true"
-                enableLazyLoading="true"
-            >
-                <uxap:sections>
-                    <uxap:ObjectPageSection id="_IDGenObjectPageSection1">
-                        <uxap:subSections>
-                            <uxap:ObjectPageSubSection
-                                id="_IDGenObjectPageSubSection1"
-                                title=""
-                                titleUppercase="false"
-                            >
-                                <uxap:blocks> -->
+           	<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+							<fb:filterGroupItems>
+								<fb:FilterGroupItem name="Status" label="Status" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<MultiComboBox
+											name="Status"
+											selectionChange=".onSelectionChange"
+											
+										>
+											<core:Item key="Draft" text="Draft"/>
+                                            <core:Item key="In Approval" text="In Approval"/>
+                                            <core:Item key="Approved" text="Approved"/>
+										</MultiComboBox>
+									</fb:control>
+
+                                    
+								</fb:FilterGroupItem>
+
+                                <fb:FilterGroupItem name="CON ID" label="CON ID" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<Input />
+									</fb:control>
+
+                                    
+								</fb:FilterGroupItem>
+							
+							
+							</fb:filterGroupItems>
+						</fb:FilterBar>
                                     <Table
                                         id="idProductsTable"
                                         inset="false"
@@ -38,21 +53,22 @@
                                     >
                                         <headerToolbar>
                                             <OverflowToolbar>
+                                           
+                                            <ToolbarSpacer/>
+                                             <SearchField width="20%" />
                                                 <Button
-                                                    text="Create Call Off" press="onNav"
+                                                    text="Create Call Off Notice" press="onNav"
                                                 />
                                                  <Button
-                                                    text="Add"
+                                                    text="Modify"
                                                 />
-                                                 <Button
-                                                    text="Delete Row"
-                                                />
+                                               
                                             </OverflowToolbar>
                                         </headerToolbar>
 
                                         <columns>
                                             <Column width="12em">
-                                                <Text text="Call of Numbers" />
+                                                <Text text="CON ID" />
                                             </Column>
                                             <Column
                                                 minScreenWidth="Tablet"

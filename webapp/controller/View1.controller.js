@@ -12,24 +12,24 @@ sap.ui.define([
             onInit: function () {
                 let data =[
                    {
-                    "CoN":"Axpo213",
+                    "CoN":"CON213",
                     "Desc":"Description",
                     "sd":"1/04/2024",
                     "ed":"1/11/2025",
-                    "status":"ok"
+                    "status":"Draft"
                    },
                    {
-                    "CoN":"Axpo213",
+                    "CoN":"CON213",
                     "Desc":"Description",
                     "sd":"1/04/2024",
                     "ed":"1/11/2025",
-                    "status":"ok"
+                    "status":"Approved"
                    }, {
-                    "CoN":"Axpo213",
+                    "CoN":"CONK213",
                     "Desc":"Description",
                     "sd":"1/04/2024",
                     "ed":"1/11/2025",
-                    "status":"ok"
+                    "status":"In Approval"
                    }
                 ]
                

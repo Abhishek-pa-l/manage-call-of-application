@@ -103,28 +103,17 @@
                                             text="Currency"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Select
-                                                        forceSelection="false"
-                                                    >
-                                                        <core:Item
-                                                            key=""
-                                                            text="USD"
-                                                        />
-                                                        <core:Item
-                                                            key=""
-                                                            text="INR"
-                                                        />
-                                                    </Select>
+                                       <Input value="USD"  editable="false"/>
                                         <Label
                                             text="Retantion"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input value="" />
+                                        <Input value=""  editable="false"/>
                                         <Label
                                             text="Payment Terms"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input value="" />
+                                        <Input value=""  editable="false"/>
                                         <Label
                                             text="Partners"
                                             class="sapUiTinyMarginTop"
@@ -284,28 +273,28 @@
                             >
                                 <uxap:blocks>
                                    
-                                    <c:Timeline
+                                  <c:Timeline
+                                    	sortOldestFirst="false"
                                         id="idTimeline"
+                                        groupBy="logDateTime"
                                         enableDoubleSided="false"
-                                        groupBy="HireDate"
-                                        growingThreshold="0"
-                                        filterTitle="Job Title"
-                                        sortOldestFirst="true"
-                                        content="{myModel>/}"
+                                        enableScroll="false"
+                                         height="100%"
+                                        filterTitle="Project Logs"
+                                        content="{logModel>/}"
                                     >
                                         <c:content>
                                             <c:TimelineItem
-                                                id="idTemplateItem"
-                                                dateTime="{myModel>HireDate}"
-                                                title="{myModel>JobTitle}"
+                                            
+                                                dateTime="{logModel>logDateTime}"
+                                                title="{logModel>logTitle}"
                                                 userNameClickable="true"
+                                                
                                                 userNameClicked="onUserNameClick"
                                                 select="onPressItems"
-                                                userPicture="{myModel>Photo}"
-                                                text="{myModel>JobResponsibilities}"
-                                                userName="{myModel>Name}"
-                                                filterValue="{myModel>JobTitle}"
-                                                icon="{myModel>Icon}"
+                                                text="{logModel>logComments}"
+                                                userName="{logModel>loggedBy}"
+                                                icon="sap-icon://employee"
                                             />
                                         </c:content>
                                     </c:Timeline>
@@ -385,7 +374,7 @@
             <Toolbar>
                 <ToolbarSpacer />
                 <Button text="Save As Draft" />
-                <Button text="Create" />
+                <Button text="Submit"  press="onSubmit"/>
                 <Button text="Cancel" />
             </Toolbar>
         </footer>

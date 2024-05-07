@@ -7,10 +7,16 @@
    
 >
     <Dialog
-        title="List of PO From ERP "
+        title="Add Items from PR or Contracts"
         contentWidth="400px"
     >
         <content>
+
+        <VBox>
+        <RadioButtonGroup  columns="2">
+        <RadioButton text="Pull From SAP ERP PR"  />
+        <RadioButton text="Pull From Contracts" />
+        </RadioButtonGroup>
          <List
                 items="{PO>/}"
                 headerText=""
@@ -20,11 +26,16 @@
             >
                 <StandardListItem title="{PO>poNo}" />
             </List>
+
+            </VBox>
       </content>
        <footer>
             <Toolbar>
                 <ToolbarSpacer />
-                
+                 <Button
+                    text="Add"
+                    press="onCancelPO"
+                />
                 <Button
                     text="Cancel"
                     press="onCancelPO"
