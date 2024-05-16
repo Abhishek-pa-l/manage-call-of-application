@@ -29,6 +29,10 @@ server:
       afterMiddleware: compression
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - path: /odata
+            url: https://af9f7ea0trial-dev-manage-call-off-cap-backend-srv.cfapps.us10-001.hana.ondemand.com
+            destination: manage_call_off_dest
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:

@@ -15,6 +15,17 @@
       "version": "1.13.3",
       "toolsId": "1a651a9d-a432-437e-a922-b5f83fc1fc69"
     },
+    "dataSources": {
+      "mainService": {
+        "uri": "/v2/odata/v4/catalog/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
     "crossNavigation": {
       "inbounds": {
         "manage-manage": {
