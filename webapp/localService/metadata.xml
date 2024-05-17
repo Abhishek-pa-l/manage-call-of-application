@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Manage_call_off_headerT" EntityType="CatalogService.Manage_call_off_headerT">
+                    <NavigationPropertyBinding Path="lineItems" Target="Manage_call_off_lineItemT"/>
+                </EntitySet>
+                <EntitySet Name="Manage_call_off_lineItemT" EntityType="CatalogService.Manage_call_off_lineItemT">
+                    <NavigationPropertyBinding Path="parentKey" Target="Manage_call_off_headerT"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="Manage_call_off_headerT">
+                <Key>
+                    <PropertyRef Name="partners"/>
+                </Key>
+                <Property Name="partners" Type="Edm.String" Nullable="false"/>
+                <Property Name="callOffNoticeType" Type="Edm.String"/>
+                <Property Name="supplier" Type="Edm.String"/>
+                <Property Name="contract" Type="Edm.String"/>
+                <Property Name="startDate" Type="Edm.Date"/>
+                <Property Name="endDate" Type="Edm.Date"/>
+                <Property Name="currency" Type="Edm.String"/>
+                <Property Name="retention" Type="Edm.String"/>
+                <Property Name="paymentTerms" Type="Edm.String"/>
+                <NavigationProperty Name="lineItems" Type="Collection(CatalogService.Manage_call_off_lineItemT)" Partner="parentKey">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Manage_call_off_lineItemT">
+                <Key>
+                    <PropertyRef Name="parentKey_partners"/>
+                </Key>
+                <NavigationProperty Name="parentKey" Type="CatalogService.Manage_call_off_headerT" Partner="lineItems">
+                    <ReferentialConstraint Property="parentKey_partners" ReferencedProperty="partners"/>
+                </NavigationProperty>
+                <Property Name="parentKey_partners" Type="Edm.String" Nullable="false"/>
+                <Property Name="itemCategory" Type="Edm.String"/>
+                <Property Name="shortText" Type="Edm.String"/>
+                <Property Name="materialGroup" Type="Edm.String"/>
+                <Property Name="quantity" Type="Edm.String"/>
+                <Property Name="uom" Type="Edm.String"/>
+                <Property Name="price" Type="Edm.String"/>
+                <Property Name="deliveryDate" Type="Edm.Date"/>
+                <Property Name="accountAssignmentCategory" Type="Edm.String"/>
+            </EntityType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

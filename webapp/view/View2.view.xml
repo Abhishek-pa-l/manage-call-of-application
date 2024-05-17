@@ -53,6 +53,7 @@
                                         <Select
                                                         forceSelection="false"
                                                         width="100%"
+                                                        id="ConId"
                                                     >
                                                         <core:Item
                                                             key=""
@@ -92,33 +93,33 @@
                                             text="Start Date"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <DatePicker ></DatePicker>
+                                        <DatePicker id="strtDateId"></DatePicker>
                                         <Label
                                             id="_IDGenLe2"
                                             text="End Date"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <DatePicker ></DatePicker>
+                                        <DatePicker id="endDateId" ></DatePicker>
                                         <Label
                                             text="Currency"
                                             class="sapUiTinyMarginTop"
                                         />
-                                       <Input value="USD"  editable="false"/>
+                                       <Input id="currencyId" value="USD"  editable="false"/>
                                         <Label
                                             text="Retantion"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input value=""  editable="false"/>
+                                        <Input value="" id="retentionId" editable="false"/>
                                         <Label
                                             text="Payment Terms"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input value=""  editable="false"/>
+                                        <Input value="" id="paymentTermId" editable="false"/>
                                         <Label
                                             text="Partners"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input value="" />
+                                        <Input value="" id="partnerId" />
                                     </f:SimpleForm>
                                 </uxap:blocks>
                             </uxap:ObjectPageSubSection>
@@ -152,12 +153,12 @@
                                             <Column width="12em">
                                                 <Text text="Item Category" />
                                             </Column>
-                                            <Column
+                                            <!-- <Column
                                                 minScreenWidth="Tablet"
                                                 demandPopin="true"
                                             >
                                                 <Text text="Material" />
-                                            </Column>
+                                            </Column> -->
                                             <Column
                                                 minScreenWidth="Desktop"
                                                 demandPopin="true"
@@ -217,7 +218,7 @@
                                                         />
                                                     </Select>
                                                     <Input value="{myModell>ShortText}" />
-                                                   <Select
+                                                   <!-- <Select
                                                         forceSelection="false"
                                                     >
                                                         <core:Item
@@ -228,7 +229,7 @@
                                                             key=""
                                                             text="Material Type 2"
                                                         />
-                                                    </Select>
+                                                    </Select> -->
                                                     <Input value="{myModell>Qunatity}"/>
                                                    <Select
                                                         forceSelection="false"

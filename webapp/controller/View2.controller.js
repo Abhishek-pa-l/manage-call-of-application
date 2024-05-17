@@ -363,6 +363,87 @@ sap.ui.define([
                     }
                 });
             },
+            onSubmit: function() {
+                let oModel = this.getOwnerComponent().getModel();
+             
+                // Collect form data
+                const partners = this.getView().byId("partnerId").getValue();
+                const callOffNoticeType = this.getView().byId("ConId").getSelectedItem().getText();
+                const supplier = this.getView().byId("idContractorNumberInput").getValue();
+                const contract = this.getView().byId("idContractNumberInput").getValue();
+                const startDate = this.getView().byId("strtDateId").getDateValue();
+                const endDate = this.getView().byId("endDateId").getDateValue();
+                const currency = this.getView().byId("currencyId").getValue();
+                const retention = this.getView().byId("retentionId").getValue();
+                const paymentTerms = this.getView().byId("paymentTermId").getValue();
+             
+                // Collect table data
+                let aTableData = [];
+                let oTable = this.getView().byId("idProductsTable");
+                let aItems = oTable.getItems();
+             
+                aItems.forEach(function(oItem) {
+                    // Assuming the row has input fields with specific ids
+                    let itemCategory = oItem.getCells()[0].getSelectedItem().getText(); // Adjust index according to your table structure
+                    let shortText = oItem.getCells()[1].getSelectedItem().getText();
+                    let materialGroup = oItem.getCells()[2].getValue();
+                    let quantity = oItem.getCells()[3].getValue();
+                    let uom = oItem.getCells()[4].getSelectedItem().getText();
+                    let price = oItem.getCells()[5].getValue();
+                    let deliveryDate = oItem.getCells()[6].getDateValue();
+                    let accountAssignmentCategory = oItem.getCells()[7].getSelectedItem().getText();
+             
+                    aTableData.push({
+                        itemCategory: itemCategory,
+                        shortText: shortText,
+                        materialGroup: materialGroup,
+                        quantity: quantity,
+                        uom: uom,
+                        price: price,
+                        deliveryDate: deliveryDate,
+                        accountAssignmentCategory: accountAssignmentCategory
+                    });
+                });
+             
+                // Combine form data into header object
+                let headerData = {
+                    partners: partners,
+                    callOffNoticeType: callOffNoticeType,
+                    supplier: supplier,
+                    contract: contract,
+                    startDate: startDate,
+                    endDate: endDate,
+                    currency: currency,
+                    retention: retention,
+                    paymentTerms: paymentTerms
+                };
+             
+                // Create header entry in the model
+                oModel.create("/Manage_call_off_headerT", headerData, {
+                    success: function(oData) {
+                        // Header entry created successfully
+                        // Now create line items with reference to the header key (partners)
+             
+                        aTableData.forEach(function(item) {
+                            item.parentKey_partners = partners; // Set the reference key
+             
+                            oModel.create("/Manage_call_off_lineItemT", item, {
+                                success: function() {
+                                    console.log("Line item created");
+                                },
+                                error: function() {
+                                    sap.m.MessageBox.error("Error saving line item data");
+                                }
+                            });
+                        });
+             
+                        sap.m.MessageBox.success("Data saved");
+                    },
+                    error: function() {
+                        sap.m.MessageBox.error("Error saving header data");
+                    }
+                });
+            }
 
 
 
