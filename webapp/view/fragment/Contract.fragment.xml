@@ -12,13 +12,13 @@
     >
         <content>
          <List
-                items="{con>/}"
+                items="{/contractF4T}"
                 headerText=""
                 growing="true"
                 growingThreshold="4"
                 growingScrollToLoad="false"
             >
-                <StandardListItem title="{con>conNo}" />
+                <StandardListItem title="{contractF4T}" type="Active" press="onContractSelect" />
             </List>
       </content>
        <footer>

@@ -54,15 +54,13 @@
                                                         forceSelection="false"
                                                         width="100%"
                                                         id="ConId"
+                                                        items="{/call_off_notice_typeT}"
                                                     >
                                                         <core:Item
                                                             key=""
-                                                            text="CON"
+                                                            text="{callOffNoticeType}"
                                                         />
-                                                        <core:Item
-                                                            key=""
-                                                            text="CONK"
-                                                        />
+                                                       
                                                     </Select>
 
                                         <Label
@@ -153,12 +151,12 @@
                                             <Column width="12em">
                                                 <Text text="Item Category" />
                                             </Column>
-                                            <!-- <Column
+                                            <Column
                                                 minScreenWidth="Tablet"
                                                 demandPopin="true"
                                             >
                                                 <Text text="Material" />
-                                            </Column> -->
+                                            </Column>
                                             <Column
                                                 minScreenWidth="Desktop"
                                                 demandPopin="true"
@@ -195,91 +193,58 @@
                                                 <cells>
                                                     <Select
                                                         forceSelection="false"
+                                                        items="{/item_categoryT}"
                                                     >
                                                         <core:Item
                                                             key=""
-                                                            text="Material"
+                                                            text="{itemCategory}"
                                                         />
-                                                        <core:Item
-                                                            key=""
-                                                            text="Service"
-                                                        />
+                                                       
                                                     </Select>
                                                     <Select
                                                         forceSelection="false"
+                                                        items="{/materialT}"
+
                                                     >
                                                         <core:Item
                                                             key=""
-                                                            text="Material 1"
+                                                            text="{material}"
                                                         />
-                                                        <core:Item
-                                                            key=""
-                                                            text="Material 2"
-                                                        />
+                                                       
                                                     </Select>
                                                     <Input value="{myModell>ShortText}" />
-                                                   <!-- <Select
+                                                   <Select
                                                         forceSelection="false"
+                                                        items="{/material_groupT}"
                                                     >
                                                         <core:Item
                                                             key=""
-                                                            text="Material Type 1"
+                                                            text="{materialGroup}"
                                                         />
-                                                        <core:Item
-                                                            key=""
-                                                            text="Material Type 2"
-                                                        />
-                                                    </Select> -->
+                                                        
+                                                    </Select>
                                                     <Input value="{myModell>Qunatity}"/>
                                                    <Select
                                                         forceSelection="false"
+                                                        items="{/uomT}"
                                                     >
                                                         <core:Item
                                                             key=""
-                                                            text="AU"
+                                                            text="{uom}"
                                                         />
-                                                        <core:Item
-                                                            key=""
-                                                            text="EA"
-                                                        />
+                                                       
                                                     </Select>
                                                     <Input value="{myModell>price}" />
                                                     <DatePicker ></DatePicker>
                                                       <Select
                                                         forceSelection="false"
+                                                        items="{/account_assignment_categoryT}"
                                                     >
                                                         <core:Item
                                                             key=""
-                                                            text="QA Code"
+                                                            text="{accountAssignmentCategory}"
                                                         />
-                                                        <core:Item
-                                                            key=""
-                                                            text="Inspection level"
-                                                        />
-                                                        <core:Item
-                                                            key=""
-                                                            text="Order"
-                                                        />
-                                                          <core:Item
-                                                            key="0"
-                                                            text="DUMMY Acct Assgn Cat (0)"
-                                                        />
-                                                          <core:Item
-                                                            key="1"
-                                                            text="Defnd Acct Assgn Cat (1)"
-                                                        />
-                                                         <core:Item
-                                                            key="2"
-                                                            text=" Project stock: Defnd (Q)"
-                                                        />
-                                                          <core:Item
-                                                            key="3"
-                                                            text="No AA for Mat.Grp. (W)"
-                                                        />
-                                                          <core:Item
-                                                            key="4"
-                                                            text="Accessories Cost(Z)"
-                                                        />
+                                                        
                                                         
                                                     </Select>
                                                 </cells>

@@ -327,7 +327,7 @@ sap.ui.define([
                     success: function (result1) {
                         debugger;
                         sap.m.MessageBox.success("Sent For Approval");
-                        
+
 
                     }.bind(this),
                     error: function (oError) {
@@ -363,9 +363,9 @@ sap.ui.define([
                     }
                 });
             },
-            onSubmit: function() {
+            onSubmit: function () {
                 let oModel = this.getOwnerComponent().getModel();
-            
+
                 // Collect form data
                 const partners = this.getView().byId("partnerId").getValue();
                 const callOffNoticeType = this.getView().byId("ConId").getSelectedItem().getText();
@@ -376,26 +376,26 @@ sap.ui.define([
                 const currency = this.getView().byId("currencyId").getValue();
                 const retention = this.getView().byId("retentionId").getValue();
                 const paymentTerms = this.getView().byId("paymentTermId").getValue();
-            
-                // Collect table data
+
                 let aTableData = [];
                 let oTable = this.getView().byId("idProductsTable");
                 let aItems = oTable.getItems();
-            
-                aItems.forEach(function(oItem) {
-                    // Assuming the row has input fields with specific ids
-                    let itemCategory = oItem.getCells()[0].getSelectedItem().getText(); // Adjust index according to your table structure
-                    let shortText = oItem.getCells()[1].getSelectedItem().getText();
-                    let materialGroup = oItem.getCells()[2].getValue();
-                    let quantity = oItem.getCells()[3].getValue();
-                    let uom = oItem.getCells()[4].getSelectedItem().getText();
-                    let price = oItem.getCells()[5].getValue();
-                    let deliveryDate = oItem.getCells()[6].getDateValue();
-                    let accountAssignmentCategory = oItem.getCells()[7].getSelectedItem().getText();
-            
+
+                aItems.forEach(function (oItem) {
+                    let itemCategory = oItem.getCells()[0].getSelectedItem().getText(); 
+                    let material = oItem.getCells()[1].getSelectedItem().getText(); 
+                    let shortText = oItem.getCells()[2].getValue();
+                    let materialGroup = oItem.getCells()[3].getSelectedItem().getText(); 
+                    let quantity = oItem.getCells()[4].getValue();
+                    let uom = oItem.getCells()[5].getSelectedItem().getText();
+                    let price = oItem.getCells()[6].getValue();
+                    let deliveryDate = oItem.getCells()[7].getDateValue();
+                    let accountAssignmentCategory = oItem.getCells()[8].getSelectedItem().getText();
+
                     aTableData.push({
                         parentKey_partners: partners, // Reference to the parent key
                         itemCategory: itemCategory,
+                        material:material,
                         shortText: shortText,
                         materialGroup: materialGroup,
                         quantity: quantity,
@@ -405,8 +405,7 @@ sap.ui.define([
                         accountAssignmentCategory: accountAssignmentCategory
                     });
                 });
-            
-                // Combine form data into header object with nested line items
+
                 let headerData = {
                     partners: partners,
                     callOffNoticeType: callOffNoticeType,
@@ -419,18 +418,51 @@ sap.ui.define([
                     paymentTerms: paymentTerms,
                     lineItems: aTableData // Nested line items
                 };
-            
-                
+
+
                 oModel.create("/Manage_call_off_headerT", headerData, {
-                    success: function() {
+                    success: function () {
                         sap.m.MessageBox.success("Data saved");
                     },
-                    error: function() {
+                    error: function () {
                         sap.m.MessageBox.error("Error saving data");
                     }
                 });
+            },
+            onSupplierSelect: function (oEvent) {
+                debugger
+                // Get the selected item
+                var oSelectedItem = oEvent.getSource();
+                var sSupplierName = oSelectedItem.getTitle();
+                
+                // Find the input field by its ID (ensure you have the ID assigned in the XML view)
+                var oInputField = this.byId("idContractorNumberInput");
+                
+                // Set the value of the input field
+                if (oInputField) {
+                    oInputField.setValue(sSupplierName);
+                }
+    
+                // Close the dialog
+                this.Supplier.close();
+            },
+            onContractSelect:function(oEvent){
+                 // Get the selected item
+                 var oSelectedItem = oEvent.getSource();
+                 var contractName = oSelectedItem.getTitle();
+                 
+                 // Find the input field by its ID (ensure you have the ID assigned in the XML view)
+                 var oInputField = this.byId("idContractNumberInput");
+                 
+                 // Set the value of the input field
+                 if (oInputField) {
+                     oInputField.setValue(contractName);
+                 }
+     
+                 // Close the dialog
+                 this.contract.close();
             }
-            
+
 
 
 
