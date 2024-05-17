@@ -365,7 +365,7 @@ sap.ui.define([
             },
             onSubmit: function() {
                 let oModel = this.getOwnerComponent().getModel();
-             
+            
                 // Collect form data
                 const partners = this.getView().byId("partnerId").getValue();
                 const callOffNoticeType = this.getView().byId("ConId").getSelectedItem().getText();
@@ -376,12 +376,12 @@ sap.ui.define([
                 const currency = this.getView().byId("currencyId").getValue();
                 const retention = this.getView().byId("retentionId").getValue();
                 const paymentTerms = this.getView().byId("paymentTermId").getValue();
-             
+            
                 // Collect table data
                 let aTableData = [];
                 let oTable = this.getView().byId("idProductsTable");
                 let aItems = oTable.getItems();
-             
+            
                 aItems.forEach(function(oItem) {
                     // Assuming the row has input fields with specific ids
                     let itemCategory = oItem.getCells()[0].getSelectedItem().getText(); // Adjust index according to your table structure
@@ -392,8 +392,9 @@ sap.ui.define([
                     let price = oItem.getCells()[5].getValue();
                     let deliveryDate = oItem.getCells()[6].getDateValue();
                     let accountAssignmentCategory = oItem.getCells()[7].getSelectedItem().getText();
-             
+            
                     aTableData.push({
+                        parentKey_partners: partners, // Reference to the parent key
                         itemCategory: itemCategory,
                         shortText: shortText,
                         materialGroup: materialGroup,
@@ -404,8 +405,8 @@ sap.ui.define([
                         accountAssignmentCategory: accountAssignmentCategory
                     });
                 });
-             
-                // Combine form data into header object
+            
+                // Combine form data into header object with nested line items
                 let headerData = {
                     partners: partners,
                     callOffNoticeType: callOffNoticeType,
@@ -415,35 +416,21 @@ sap.ui.define([
                     endDate: endDate,
                     currency: currency,
                     retention: retention,
-                    paymentTerms: paymentTerms
+                    paymentTerms: paymentTerms,
+                    lineItems: aTableData // Nested line items
                 };
-             
-                // Create header entry in the model
+            
+                // Create header entry with nested line items in the model (deep insert)
                 oModel.create("/Manage_call_off_headerT", headerData, {
-                    success: function(oData) {
-                        // Header entry created successfully
-                        // Now create line items with reference to the header key (partners)
-             
-                        aTableData.forEach(function(item) {
-                            item.parentKey_partners = partners; // Set the reference key
-             
-                            oModel.create("/Manage_call_off_lineItemT", item, {
-                                success: function() {
-                                    console.log("Line item created");
-                                },
-                                error: function() {
-                                    sap.m.MessageBox.error("Error saving line item data");
-                                }
-                            });
-                        });
-             
+                    success: function() {
                         sap.m.MessageBox.success("Data saved");
                     },
                     error: function() {
-                        sap.m.MessageBox.error("Error saving header data");
+                        sap.m.MessageBox.error("Error saving data");
                     }
                 });
             }
+            
 
 
 
