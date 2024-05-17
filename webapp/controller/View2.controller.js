@@ -420,7 +420,7 @@ sap.ui.define([
                     lineItems: aTableData // Nested line items
                 };
             
-                // Create header entry with nested line items in the model (deep insert)
+                
                 oModel.create("/Manage_call_off_headerT", headerData, {
                     success: function() {
                         sap.m.MessageBox.success("Data saved");
