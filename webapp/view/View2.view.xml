@@ -51,17 +51,16 @@
                                             class="sapUiTinyMarginTop"
                                         />
                                         <Select
-                                                        forceSelection="false"
-                                                        width="100%"
-                                                        id="ConId"
-                                                        items="{/call_off_notice_typeT}"
-                                                    >
-                                                        <core:Item
-                                                            key=""
-                                                            text="{callOffNoticeType}"
-                                                        />
-                                                       
-                                                    </Select>
+                                            forceSelection="false"
+                                            width="100%"
+                                            id="ConId"
+                                            items="{/call_off_notice_typeT}"
+                                        >
+                                            <core:Item
+                                                key=""
+                                                text="{callOffNoticeType}"
+                                            />
+                                        </Select>
 
                                         <Label
                                             id="_IDGe"
@@ -91,33 +90,58 @@
                                             text="Start Date"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <DatePicker id="strtDateId"></DatePicker>
+                                        <DatePicker id="strtDateId" />
                                         <Label
                                             id="_IDGenLe2"
                                             text="End Date"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <DatePicker id="endDateId" ></DatePicker>
+                                        <DatePicker id="endDateId" />
                                         <Label
                                             text="Currency"
                                             class="sapUiTinyMarginTop"
                                         />
-                                       <Input id="currencyId" value="USD"  editable="false"/>
+                                        <Input
+                                            id="currencyId"
+                                            value="USD"
+                                            editable="false"
+                                        />
                                         <Label
                                             text="Retantion"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input value="" id="retentionId" editable="false"/>
+                                        <Input
+                                            value=""
+                                            id="retentionId"
+                                            editable="false"
+                                        />
                                         <Label
                                             text="Payment Terms"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input value="" id="paymentTermId" editable="false"/>
+                                        <Input
+                                            value=""
+                                            id="paymentTermId"
+                                            editable="false"
+                                        />
                                         <Label
                                             text="Partners"
                                             class="sapUiTinyMarginTop"
                                         />
-                                        <Input value="" id="partnerId" />
+                                        	<MultiComboBox
+			selectionChange="handleSelectionChange"
+			selectionFinish="handleSelectionFinish"
+            id="partnerID"
+			width="350px"
+			items="{/partnerF4T}">
+			<core:Item key="{partnerF4T}" text="{partnerF4T}"/>
+		</MultiComboBox>
+                                        <Label text="Status" />
+                                        <Input
+                                            value="NEW"
+                                            id="statusID"
+                                            editable="false"
+                                        />
                                     </f:SimpleForm>
                                 </uxap:blocks>
                             </uxap:ObjectPageSubSection>
@@ -135,15 +159,23 @@
                                     >
                                         <headerToolbar>
                                             <OverflowToolbar>
-                                            <ToolbarSpacer ></ToolbarSpacer>
+                                                <ToolbarSpacer />
                                                 <Button
-                                                    text="Add from Document" press="onAddFromDocument"
+                                                    text="Add from Document"
+                                                    press="onAddFromDocument"
                                                 />
-                                                <Button text="Add Row" press="onAddItemPress"></Button>
-                                                <Button text="Delete Row" press="onDelete"></Button>
-                                                <Button text="Add more Details" press="onAddMoreDetails"></Button>
-
-
+                                                <Button
+                                                    text="Add Row"
+                                                    press="onAddItemPress"
+                                                />
+                                                <Button
+                                                    text="Delete Row"
+                                                    press="onDelete"
+                                                />
+                                                <Button
+                                                    text="Add more Details"
+                                                    press="onAddMoreDetails"
+                                                />
                                             </OverflowToolbar>
                                         </headerToolbar>
 
@@ -199,21 +231,20 @@
                                                             key=""
                                                             text="{itemCategory}"
                                                         />
-                                                       
                                                     </Select>
                                                     <Select
                                                         forceSelection="false"
                                                         items="{/materialT}"
-
                                                     >
                                                         <core:Item
                                                             key=""
                                                             text="{material}"
                                                         />
-                                                       
                                                     </Select>
-                                                    <Input value="{myModell>ShortText}" />
-                                                   <Select
+                                                    <Input
+                                                        value="{myModell>ShortText}"
+                                                    />
+                                                    <Select
                                                         forceSelection="false"
                                                         items="{/material_groupT}"
                                                     >
@@ -221,10 +252,11 @@
                                                             key=""
                                                             text="{materialGroup}"
                                                         />
-                                                        
                                                     </Select>
-                                                    <Input value="{myModell>Qunatity}"/>
-                                                   <Select
+                                                    <Input
+                                                        value="{myModell>Qunatity}"
+                                                    />
+                                                    <Select
                                                         forceSelection="false"
                                                         items="{/uomT}"
                                                     >
@@ -232,11 +264,12 @@
                                                             key=""
                                                             text="{uom}"
                                                         />
-                                                       
                                                     </Select>
-                                                    <Input value="{myModell>price}" />
-                                                    <DatePicker ></DatePicker>
-                                                      <Select
+                                                    <Input
+                                                        value="{myModell>price}"
+                                                    />
+                                                    <DatePicker />
+                                                    <Select
                                                         forceSelection="false"
                                                         items="{/account_assignment_categoryT}"
                                                     >
@@ -244,8 +277,6 @@
                                                             key=""
                                                             text="{accountAssignmentCategory}"
                                                         />
-                                                        
-                                                        
                                                     </Select>
                                                 </cells>
                                             </ColumnListItem>
@@ -259,24 +290,21 @@
                                 title="History"
                             >
                                 <uxap:blocks>
-                                   
-                                  <c:Timeline
-                                    	sortOldestFirst="false"
+                                    <c:Timeline
+                                        sortOldestFirst="false"
                                         id="idTimeline"
                                         groupBy="logDateTime"
                                         enableDoubleSided="false"
                                         enableScroll="false"
-                                         height="100%"
+                                        height="100%"
                                         filterTitle="Project Logs"
                                         content="{logModel>/}"
                                     >
                                         <c:content>
                                             <c:TimelineItem
-                                            
                                                 dateTime="{logModel>logDateTime}"
                                                 title="{logModel>logTitle}"
                                                 userNameClickable="true"
-                                                
                                                 userNameClicked="onUserNameClick"
                                                 select="onPressItems"
                                                 text="{logModel>logComments}"
@@ -286,7 +314,6 @@
                                         </c:content>
                                     </c:Timeline>
                                 </uxap:blocks>
-                                
                             </uxap:ObjectPageSubSection>
 
                             <uxap:ObjectPageSubSection
@@ -360,8 +387,14 @@
         <footer>
             <Toolbar>
                 <ToolbarSpacer />
-                <Button text="Save As Draft" />
-                <Button text="Submit"  press="onSubmit"/>
+                <Button
+                    text="Save As Draft"
+                    press="onSaveAsDraft"
+                />
+                <Button
+                    text="Submit"
+                    press="onSubmit"
+                />
                 <Button text="Cancel" />
             </Toolbar>
         </footer>

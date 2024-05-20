@@ -363,11 +363,29 @@ sap.ui.define([
                     }
                 });
             },
-            onSubmit: function () {
+            onSaveAsDraft: function () {
                 let oModel = this.getOwnerComponent().getModel();
+                function generateUniqueId() {
+                    const prefix = "CON";
+                    const date = new Date();
+                    const dateString = date.toISOString().replace(/[-:.TZ]/g, "");
+                    return `${prefix}${dateString}`;
+                }
+
+                let oMultiComboBox = this.getView().byId("partnerID");
+
+                // Get selected items
+                let aSelectedItems = oMultiComboBox.getSelectedKeys();
+                let sSelectedPartners = aSelectedItems.map(function (oItem) {
+                    return oItem; // Get the text of each selected item
+                }).join(", ");
 
                 // Collect form data
-                const partners = this.getView().byId("partnerId").getValue();
+                let callOffNoticeID = generateUniqueId();
+
+
+                const partners = sSelectedPartners;
+                debugger
                 const callOffNoticeType = this.getView().byId("ConId").getSelectedItem().getText();
                 const supplier = this.getView().byId("idContractorNumberInput").getValue();
                 const contract = this.getView().byId("idContractNumberInput").getValue();
@@ -376,16 +394,17 @@ sap.ui.define([
                 const currency = this.getView().byId("currencyId").getValue();
                 const retention = this.getView().byId("retentionId").getValue();
                 const paymentTerms = this.getView().byId("paymentTermId").getValue();
+                const status = this.getView().byId("statusID").getValue();
 
                 let aTableData = [];
                 let oTable = this.getView().byId("idProductsTable");
                 let aItems = oTable.getItems();
 
                 aItems.forEach(function (oItem) {
-                    let itemCategory = oItem.getCells()[0].getSelectedItem().getText(); 
-                    let material = oItem.getCells()[1].getSelectedItem().getText(); 
+                    let itemCategory = oItem.getCells()[0].getSelectedItem().getText();
+                    let material = oItem.getCells()[1].getSelectedItem().getText();
                     let shortText = oItem.getCells()[2].getValue();
-                    let materialGroup = oItem.getCells()[3].getSelectedItem().getText(); 
+                    let materialGroup = oItem.getCells()[3].getSelectedItem().getText();
                     let quantity = oItem.getCells()[4].getValue();
                     let uom = oItem.getCells()[5].getSelectedItem().getText();
                     let price = oItem.getCells()[6].getValue();
@@ -393,9 +412,9 @@ sap.ui.define([
                     let accountAssignmentCategory = oItem.getCells()[8].getSelectedItem().getText();
 
                     aTableData.push({
-                        parentKey_partners: partners, // Reference to the parent key
+                        parentKey_callOffNoticeID: callOffNoticeID, // Reference to the parent key
                         itemCategory: itemCategory,
-                        material:material,
+                        material: material,
                         shortText: shortText,
                         materialGroup: materialGroup,
                         quantity: quantity,
@@ -407,7 +426,8 @@ sap.ui.define([
                 });
 
                 let headerData = {
-                    partners: partners,
+                    callOffNoticeID: callOffNoticeID,
+                    partner: partners,
                     callOffNoticeType: callOffNoticeType,
                     supplier: supplier,
                     contract: contract,
@@ -416,52 +436,56 @@ sap.ui.define([
                     currency: currency,
                     retention: retention,
                     paymentTerms: paymentTerms,
+                    status: status,
                     lineItems: aTableData // Nested line items
                 };
 
 
                 oModel.create("/Manage_call_off_headerT", headerData, {
-                    success: function () {
-                        sap.m.MessageBox.success("Data saved");
+                    success: function (data) {
+                        sap.m.MessageBox.success("Data saved with CON ID " + data.callOffNoticeID);
                     },
                     error: function () {
                         sap.m.MessageBox.error("Error saving data");
                     }
+
                 });
+                this.getView().byId("statusID").setValue("DRAFT");
             },
             onSupplierSelect: function (oEvent) {
                 debugger
                 // Get the selected item
                 var oSelectedItem = oEvent.getSource();
                 var sSupplierName = oSelectedItem.getTitle();
-                
+
                 // Find the input field by its ID (ensure you have the ID assigned in the XML view)
                 var oInputField = this.byId("idContractorNumberInput");
-                
+
                 // Set the value of the input field
                 if (oInputField) {
                     oInputField.setValue(sSupplierName);
                 }
-    
+
                 // Close the dialog
                 this.Supplier.close();
             },
-            onContractSelect:function(oEvent){
-                 // Get the selected item
-                 var oSelectedItem = oEvent.getSource();
-                 var contractName = oSelectedItem.getTitle();
-                 
-                 // Find the input field by its ID (ensure you have the ID assigned in the XML view)
-                 var oInputField = this.byId("idContractNumberInput");
-                 
-                 // Set the value of the input field
-                 if (oInputField) {
-                     oInputField.setValue(contractName);
-                 }
-     
-                 // Close the dialog
-                 this.contract.close();
-            }
+            onContractSelect: function (oEvent) {
+                // Get the selected item
+                var oSelectedItem = oEvent.getSource();
+                var contractName = oSelectedItem.getTitle();
+
+                // Find the input field by its ID (ensure you have the ID assigned in the XML view)
+                var oInputField = this.byId("idContractNumberInput");
+
+                // Set the value of the input field
+                if (oInputField) {
+                    oInputField.setValue(contractName);
+                }
+
+                // Close the dialog
+                this.contract.close();
+            },
+
 
 
 

@@ -9,145 +9,127 @@
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:upload="sap.m.upload"
-    	xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:fb="sap.ui.comp.filterbar"
 >
     <Page
         id="page"
         title="{i18n>title}"
     >
         <content>
-           	<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
-							<fb:filterGroupItems>
-								<fb:FilterGroupItem name="Status" label="Status" groupName="Group1" visibleInFilterBar="true">
-									<fb:control>
-										<MultiComboBox
-											name="Status"
-											selectionChange=".onSelectionChange"
-											
-										>
-											<core:Item key="Draft" text="Draft"/>
-                                            <core:Item key="In Approval" text="In Approval"/>
-                                            <core:Item key="Approved" text="Approved"/>
-										</MultiComboBox>
-									</fb:control>
+            <fb:FilterBar
+                id="filterbar"
+                persistencyKey="myPersKey"
+                useToolbar="false"
+                search=".onSearch"
+                filterChange=".onFilterChange"
+                afterVariantLoad=".onAfterVariantLoad"
+            >
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem
+                        name="Status"
+                        label="Status"
+                        groupName="Group1"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                name="Status"
+                                selectionChange=".onSelectionChange"
+                            >
+                                <core:Item
+                                    key="Draft"
+                                    text="Draft"
+                                />
+                                <core:Item
+                                    key="In Approval"
+                                    text="In Approval"
+                                />
+                                <core:Item
+                                    key="Approved"
+                                    text="Approved"
+                                />
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
 
-                                    
-								</fb:FilterGroupItem>
+                    <!-- Other filter items -->
 
-                                <fb:FilterGroupItem name="CON ID" label="CON ID" groupName="Group1" visibleInFilterBar="true">
-									<fb:control>
-										<Input />
-									</fb:control>
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+            <Table
+                id="idProductsTable"
+                inset="false"
+                mode="SingleSelectLeft"
+                items="{/Manage_call_off_headerT}"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <SearchField width="20%" />
+                        <Button
+                            text="Create Call Off Notice"
+                            press="onNav"
+                        />
+                        <Button text="Modify" />
+                    </OverflowToolbar>
+                </headerToolbar>
 
-                                    
-								</fb:FilterGroupItem>
-
-                                  <fb:FilterGroupItem name="Supplier" label="Supplier" groupName="Group1" visibleInFilterBar="true">
-									<fb:control>
-										<Input />
-									</fb:control>
-
-                                    
-								</fb:FilterGroupItem>
-
-                                  <fb:FilterGroupItem name="Contract" label="Contract" groupName="Group1" visibleInFilterBar="true">
-									<fb:control>
-										<Input />
-									</fb:control>
-
-                                    
-								</fb:FilterGroupItem>
-
-                                  <fb:FilterGroupItem name="Call Off Type" label="Call Off Type" groupName="Group1" visibleInFilterBar="true">
-									<fb:control>
-										<Input />
-									</fb:control>
-
-                                    
-								</fb:FilterGroupItem>
-							
-							
-							</fb:filterGroupItems>
-						</fb:FilterBar>
-                                    <Table
-                                        id="idProductsTable"
-                                        inset="false"
-                                        mode="SingleSelectLeft"
-                                        items="{myModel>/}"
-                                    >
-                                        <headerToolbar>
-                                            <OverflowToolbar>
-                                           
-                                            <ToolbarSpacer/>
-                                             <SearchField width="20%" />
-                                                <Button
-                                                    text="Create Call Off Notice" press="onNav"
-                                                />
-                                                 <Button
-                                                    text="Modify"
-                                                />
-                                               
-                                            </OverflowToolbar>
-                                        </headerToolbar>
-
-                                        <columns>
-                                            <Column width="12em">
-                                                <Text text="CON ID" />
-                                            </Column>
-                                            <Column
-                                                minScreenWidth="Tablet"
-                                                demandPopin="true"
-                                            >
-                                                <Text text="Description" />
-                                            </Column>
-                                            <Column
-                                                minScreenWidth="Desktop"
-                                                demandPopin="true"
-                                            >
-                                                <Text text="Start Date" />
-                                            </Column>
-                                            <Column
-                                                minScreenWidth="Desktop"
-                                                demandPopin="true"
-                                                hAlign="Center"
-                                            >
-                                                <Text text="End Date" />
-                                            </Column>
-                                            <Column>
-                                                <Text text="Status" />
-                                            </Column>
-                                            
-                                        </columns>
-                                        <items>
-                                            <ColumnListItem vAlign="Middle">
-                                                <cells>
-                            <Text text="{myModel>CoN}" />
-                            <Text text="{myModel>Desc}" />
-                            <Text text="{myModel>sd}" />
-                            <Text text="{myModel>ed}" />
-                            <Text text="{myModel>status}" />
-
-                            
-                                                </cells>
-                                            </ColumnListItem>
-                                        </items>
-                                    </Table>
-                                <!-- </uxap:blocks>
-                            </uxap:ObjectPageSubSection>
-
-                            
-                        </uxap:subSections>
-                    </uxap:ObjectPageSection>
-                </uxap:sections>
-            </uxap:ObjectPageLayout> -->
+                <columns>
+                    <Column width="12em">
+                        <Text text="CON ID" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Text text="Supplier" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Text text="Contract" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Desktop"
+                        demandPopin="true"
+                    >
+                        <Text text="Start Date" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Desktop"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="End Date" />
+                    </Column>
+                    <Column>
+                        <Text text="Status" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <Text text="{callOffNoticeID}" />
+                            <Text text="{supplier}" />
+                            <Text text="{contract}" />
+                            <Text
+                                text="{
+                                    path: 'startDate',
+                                     formatter: '.formatDate'
+                                }"
+                            />
+                            <Text
+                                text="{
+                                    path: 'endDate',
+                                    formatter: '.formatDate'
+                                }"
+                            />
+                            <Text text="{status}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
         </content>
-        <!-- <footer>
-            <Toolbar>
-                <ToolbarSpacer />
-                <Button text="Save As Draft" />
-                <Button text="Create" />
-                <Button text="Cancel" />
-            </Toolbar>
-        </footer> -->
     </Page>
 </mvc:View>
