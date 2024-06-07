@@ -41,6 +41,9 @@ sap.ui.define([
             onNav : function(){
                 this.getOwnerComponent().getRouter().navTo("RouteView2")
             },
+            onModify : function(){
+                this.getOwnerComponent().getRouter().navTo("RouteView3")
+            },
             formatDate: function (date) {
                 debugger
                 if (!date) {

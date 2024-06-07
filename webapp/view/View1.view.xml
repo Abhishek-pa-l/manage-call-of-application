@@ -70,7 +70,7 @@
                             text="Create Call Off Notice"
                             press="onNav"
                         />
-                        <Button text="Modify" />
+                        <Button text="Modify" press="onModify" />
                     </OverflowToolbar>
                 </headerToolbar>
 
