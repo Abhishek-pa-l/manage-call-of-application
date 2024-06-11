@@ -3,13 +3,120 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
+     xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:u="sap.ui.unified"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:upload="sap.m.upload"
    
 >
     <Page
         id="page3"
     >
         <content>
-           <Button text="aaaaa"></Button>
+            <uxap:ObjectPageLayout
+                id="ObjectPageLayout"
+                upperCaseAnchorBar="false"
+                showAnchorBar="true"
+                enableLazyLoading="true"
+            >
+                <uxap:sections>
+                    <uxap:ObjectPageSection
+                        id="_IDGenObjectPageSection1"
+                        showTitle="false"
+                    >
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="_IDGenObjectPageSubSection1"
+                                title="General Info "
+                            >
+                                <uxap:blocks>
+                                    <f:SimpleForm
+                                        id="_IDGenSimpleForm1"
+                                        editable="true"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="5"
+                                        labelSpanL="5"
+                                        labelSpanM="5"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="2"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false"
+                                    >
+                                        <Label
+                                            id="_IDGenLabel23"
+                                            text="Customer"
+                                        />
+                                        <Input value="" />
+                                        <Label
+                                            id="_IDGenLabel1"
+                                            text="Contract"
+                                        />
+ 
+                                        <Input value="" />
+                                        <Label
+                                            id="_IDGenLabel24"
+                                            text="Call-off"
+                                        />
+                                        <Input value="" />
+                                        <Label
+                                            id="_IDGenLabel2"
+                                            text="Amount"
+                                        />
+                                        <Input value="" />
+                                        <Label
+                                            id="_IDGenLabel232"
+                                            text="Status"
+                                        />
+                                        <Input
+                                            value=""
+                                            editable="false"
+                                        />
+                                        <Label
+                                            id="_IDGenLabel232212"
+                                            text="History"
+                                        />
+                                        <Input value="" />
+                                        <Label
+                                            id="_IDGenLabel11"
+                                            text="Reason Of Change"
+                                        />
+ 
+                                        <TextArea value="" />
+                                        <Label
+                                            id="_IDGenLal11"
+                                            text="Date Of Change"
+                                        />
+                                        <DatePicker value="" />
+                                    </f:SimpleForm>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
+            </uxap:ObjectPageLayout>
         </content>
+        <footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar2">
+                <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+ 
+                <Button
+                    id="_IDGenButton71"
+                    text="Submit"
+                    press="onSubmit"
+                />
+                <Button
+                    id="_IDGenButton8"
+                    text="Cancel"
+                />
+            </OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>
