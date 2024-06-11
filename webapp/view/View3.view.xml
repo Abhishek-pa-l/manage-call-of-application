@@ -9,6 +9,7 @@
     xmlns:u="sap.ui.unified"
     xmlns:f="sap.ui.layout.form"
     xmlns:upload="sap.m.upload"
+    xmlns:s="sap.suite.ui.commons"
    
 >
     <Page
@@ -98,6 +99,36 @@
                                     </f:SimpleForm>
                                 </uxap:blocks>
                             </uxap:ObjectPageSubSection>
+                            <uxap:ObjectPageSubSection
+                                id="_IDGenObjectPageSubSection"
+                                title="History"
+>
+<uxap:blocks>
+<s:Timeline
+                                    	sortOldestFirst="true"
+                                        id="idTimeline"
+                                        groupBy="logDateTime"
+                                        enableDoubleSided="false"
+                                        enableScroll="false"
+                                         height="100%"
+                                        filterTitle="History Logs"
+                                        content="{logModel>/}"
+>
+<s:content>
+<s:TimelineItem
+                                                dateTime="{logModel>logDateTime}"
+                                                title="{logModel>logTitle}"
+                                                userNameClickable="true"
+                                                userNameClicked="onUserNameClick"
+                                                select="onPressItems"
+                                                text="{logModel>logComments}"
+                                                userName="{logModel>loggedBy}"
+                                                icon="sap-icon://employee"
+                                            />
+</s:content>
+</s:Timeline>
+</uxap:blocks>
+</uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
                 </uxap:sections>
